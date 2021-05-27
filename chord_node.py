@@ -12,7 +12,7 @@ from const_chord import (
 
 
 class Transport:
-    def __init__(self, redis_ip='*', redis_port=6379, n_bits=5):
+    def __init__(self, redis_ip='redis', redis_port=6379, n_bits=5):
         self.channel = redis.StrictRedis(host=redis_ip, port=redis_port, db=0)
         self.n_bits = n_bits
         self.MAX_PROC = 2 ** n_bits
@@ -65,7 +65,7 @@ class Transport:
 
 
 class ChordNode:
-    def __init__(self, redis_ip='*', redis_port=6379, n_bits=5):
+    def __init__(self, redis_ip='redis', redis_port=6379, n_bits=5):
         self.transport = Transport(
             redis_ip=redis_ip,
             redis_port=redis_port,

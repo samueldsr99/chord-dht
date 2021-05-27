@@ -6,12 +6,52 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '6379:6379'
-
     expose:
       - 6379
+    container_name: chord_redis
 
-  chord:
-    build: .
+  node1:
+    image: chord-dht
     links:
       - redis
-    container_name: chord_dht-container
+    container_name: node1
+    command: python chord_node.py 5
+
+  node2:
+    image: chord-dht
+    links:
+      - redis
+    container_name: node2
+    command: python chord_node.py 5
+
+  node3:
+    image: chord-dht
+    links:
+      - redis
+    container_name: node3
+    command: python chord_node.py 5
+
+  node4:
+    image: chord-dht
+    links:
+      - redis
+    container_name: node4
+    command: python chord_node.py 5
+  
+  node5:
+    image: chord-dht
+    links:
+      - redis
+    container_name: node5
+    command: python chord_node.py 5
+
+  client:
+    image: chord-dht
+    links:
+      - node1
+      - node2
+      - node3
+      - node4
+      - node5
+    container_name: chord_client
+    command: python client.py

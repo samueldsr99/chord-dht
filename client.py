@@ -1,16 +1,14 @@
 import redis
 import random
-import sys
 from const_chord import (
     LOOKUP_REQ,
-    LOOKUP_REP
 )
 
 
 class Client:
     def __init__(
         self,
-        redis_ip='*',
+        redis_ip='redis',
         redis_port=6379,
         n_bits=5
     ):
@@ -39,7 +37,6 @@ class Client:
 
             message = self.channel.blpop(f'{p}-{client_id}', timeout=0)
             if message:
-                print('unformatted response:', message)
                 print('response:', message[1].decode().split('-')[1])
         except Exception:
             pass

@@ -1,10 +1,16 @@
 # Example Chord DHT Implementation in Python
 
-## Installation (from docker)
+## Build (from docker)
 ```bash
-docker-compose build
+docker image build -t chord-dht .
 ```
 
-```bash
-docker-compose run --rm chord bash
+### Execute image
+```
+docker-compose up -d
+```
+
+### To see the logs on client
+```
+docker container logs chord_client
 ```
